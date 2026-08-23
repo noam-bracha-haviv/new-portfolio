@@ -3,833 +3,232 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noam Haviv — Product Designer</title>
+  <title>Noam Bracha Haviv — Product Designer</title>
+  <meta name="description" content="Noam Bracha Haviv — product designer passionate about research and digital experience design.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Host+Grotesk:wght@600;800&display=swap" rel="stylesheet">
-  <style>
-    /* ── Reset ── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #d4d2cf;
-      color: #322929;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Host+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 
-    /* ── Typography helpers ── */
-    .font-hand   { font-family: 'Segoe Script', 'Comic Sans MS', cursive; }
-    .font-serif  { font-family: Georgia, 'Times New Roman', serif; }
-    .font-host   { font-family: 'Host Grotesk', 'Poppins', sans-serif; }
-
-    /* ── HERO SECTION ── */
-    .hero {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      min-height: 100vh;
-      background: #d5d3d0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow: hidden;
-      transform-origin: center top;
-      will-change: transform, opacity, border-radius;
-    }
-
-    /* gradient blobs */
-    .hero::before,
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 900px;
-      height: 900px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: .45;
-      z-index: 0;
-    }
-    .hero::before {
-      background: linear-gradient(135deg, #f0a0ff, #a78bfa);
-      top: -350px;
-      left: -250px;
-    }
-    .hero::after {
-      background: linear-gradient(135deg, #fde68a, #f9a8d4, #a78bfa);
-      top: -200px;
-      right: -300px;
-    }
-
-    /* Nav */
-    .nav {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 1440px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 35px 120px;
-    }
-    .nav a {
-      font-size: 16px;
-      font-weight: 700;
-      color: #000;
-      position: relative;
-      padding-bottom: 2px;
-    }
-    .nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 4px;
-      background: #2154dd;
-      transition: width .25s ease;
-    }
-    .nav a:hover::after { width: 100%; }
-    .nav-links { display: flex; gap: 32px; }
-
-    /* Hero content */
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .hero-photo-wrapper {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      overflow: hidden;
-      margin-bottom: 12px;
-      background: #bbb;
-    }
-    .hero-photo-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hello {
-      font-size: 40px;
-      color: rgba(33, 84, 221, 0.7);
-      margin-bottom: -10px;
-    }
-
-    .hero h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 80px;
-      color: #1b283c;
-      line-height: 1.05;
-    }
-
-    .hero-subtitle {
-      font-family: Georgia, serif;
-      font-size: 48px;
-      color: #949494;
-      line-height: 1.25;
-      max-width: 750px;
-      margin-top: 8px;
-    }
-
-    /* CTA buttons */
-    .hero-cta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 40px;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #2154dd;
-      color: #fff;
-      font-family: 'Host Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 14px 24px;
-      border-radius: 30px;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(33,84,221,.35);
-    }
-    .btn-primary .icon-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn-linkedin {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: #2154dd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: 'Host Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 32px;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .btn-linkedin:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(33,84,221,.35);
-    }
-
-    .chevron-down {
-      margin-top: 50px;
-      width: 24px;
-      height: 24px;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
-
-    /* ── SELECTED PROJECTS ── */
-    .section-label {
-      font-size: 20px;
-      font-weight: 600;
-      text-align: center;
-      letter-spacing: 2px;
-      margin-bottom: 40px;
-      color: #000;
-    }
-
-    .projects-section {
-      padding: 80px 40px;
-      max-width: 100%;
-      width: 100%;
-      background: #d4d2cf;
-    }
-    /* keep inner content centred */
-    .projects-section > * {
-      max-width: 1440px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .projects-grid {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 20px;
-    }
-
-    .project-card {
-      flex: 0 0 auto;
-      width: 420px;
-      height: 520px;
-      background: #aeabab;
-      border-radius: 24px;
-      border: 9px solid #d9d9d9;
-      overflow: hidden;
-      scroll-snap-align: start;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 30px;
-      position: relative;
-      transition: transform .3s, box-shadow .3s;
-      cursor: pointer;
-    }
-    .project-card:first-child {
-      border-color: #322929;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.15);
-    }
-
-    .project-card h3 {
-      font-family: Georgia, serif;
-      font-weight: 700;
-      font-size: 17px;
-      color: #000;
-      margin-bottom: 4px;
-    }
-    .project-card .project-tagline {
-      font-size: 15px;
-      font-weight: 400;
-      color: #000;
-      margin-bottom: 10px;
-    }
-    .project-card .project-desc {
-      font-size: 11px;
-      font-weight: 600;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 614px;
-      max-width: 90%;
-      height: 2px;
-      background: #949494;
-      margin: 40px auto;
-      border: none;
-      opacity: .5;
-    }
-
-    /* ── STACKING CARD Z-INDEX ── */
-    /* Each card-track sits above the previous — later sections slide OVER earlier ones */
-    #card-home     { position: relative; z-index: 1; }
-    #card-projects { position: relative; z-index: 2; background: #d4d2cf; }
-    #card-caps     { position: relative; z-index: 4; background: #d4d2cf; padding: 40px 0 60px; }
-    .contact-section { z-index: 5; }
-
-    /* ── ABOUT ME ── */
-    .about-scroll-track {
-      position: relative;
-      z-index: 3;
-      background: #d4d2cf;
-      /* height is set by JS to create the scroll runway */
-    }
-    .about-section {
-      position: sticky;
-      top: 0;
-      padding: 60px 40px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about-emoji-left {
-      position: absolute;
-      top: -10px;
-      left: 40px;
-      font-size: 100px;
-      transform: rotate(15deg);
-    }
-
-    .about-section .section-label {
-      margin-bottom: 30px;
-    }
-
-    .about-text {
-      font-family: 'Host Grotesk', sans-serif;
-      font-weight: 800;
-      font-size: 28px;
-      line-height: 1.55;
-      color: #949494;
-      max-width: 1050px;
-      margin: 0 auto;
-    }
-    .about-text .highlight {
-      color: #322929;
-    }
-    .about-text .word {
-      display: inline;
-      color: rgba(50, 41, 41, 0.15);
-      transition: color 0.2s ease;
-    }
-    .about-text .word.revealed {
-      color: #322929;
-    }
-
-    .about-emojis-bottom {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 40px;
-    }
-    .about-emojis-bottom span {
-      font-size: 90px;
-    }
-    .about-emojis-bottom span:first-child {
-      transform: rotate(3deg);
-    }
-
-    /* ── CAPABILITIES ── */
-    .capabilities-section {
-      max-width: 1169px;
-      width: 100%;
-      margin: 0 auto;
-      background: #c1bfbd;
-      border-radius: 24px;
-      padding: 80px 70px;
-      text-align: center;
-    }
-    .capabilities-section h2 {
-      font-size: 36px;
-      font-weight: 600;
-      color: #a9a8a7;
-      margin-bottom: 20px;
-    }
-    .cap-divider {
-      width: 100%;
-      height: 10px;
-      background: #322929;
-      border-radius: 5px;
-      margin-bottom: 60px;
-    }
-    .cap-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 70px 60px;
-    }
-    .cap-grid p {
-      font-size: 28px;
-      font-weight: 600;
-      color: #322929;
-      line-height: 1.3;
-    }
-
-    /* ── CONTACT / FOOTER ── */
-    .contact-section {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      background: #d4d2cf;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 100px 40px;
-    }
-
-    .contact-section::before,
-    .contact-section::after {
-      content: '';
-      position: absolute;
-      width: 900px;
-      height: 900px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: .4;
-      z-index: 0;
-    }
-    .contact-section::before {
-      background: linear-gradient(135deg, #fde68a, #f9a8d4);
-      bottom: -400px;
-      left: -250px;
-    }
-    .contact-section::after {
-      background: linear-gradient(135deg, #a78bfa, #f0a0ff);
-      bottom: -300px;
-      right: -300px;
-    }
-
-    .contact-inner {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-    }
-    .contact-inner .hello {
-      font-size: 40px;
-      color: #2154dd;
-      margin-bottom: 12px;
-    }
-    .contact-inner p {
-      font-size: 32px;
-      font-weight: 600;
-      color: #1b283c;
-      max-width: 900px;
-      line-height: 1.4;
-      margin-bottom: 50px;
-    }
-    .contact-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-    .contact-btn {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: #2154dd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .contact-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(33,84,221,.35);
-    }
-    .contact-btn svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .contact-btn.linkedin {
-      color: #fff;
-      font-family: 'Host Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 32px;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .nav { padding: 25px 40px; }
-      .hero h1 { font-size: 56px; }
-      .hero-subtitle { font-size: 34px; }
-      .cap-grid p { font-size: 22px; }
-      .capabilities-section { margin: 40px 20px; padding: 60px 40px; }
-      .about-text { font-size: 22px; }
-      .about-emoji-left { font-size: 70px; left: 10px; }
-    }
-
-    @media (max-width: 768px) {
-      .nav { padding: 20px 24px; }
-      .nav a { font-size: 14px; }
-      .nav-links { gap: 20px; }
-      .hero h1 { font-size: 42px; }
-      .hero-subtitle { font-size: 26px; }
-      .hero-photo-wrapper { width: 200px; height: 200px; }
-      .hello { font-size: 28px; }
-      .projects-grid { gap: 16px; }
-      .project-card { width: 320px; height: 440px; }
-      .about-text { font-size: 18px; }
-      .about-emoji-left { display: none; }
-      .about-emojis-bottom span { font-size: 60px; }
-      .cap-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .cap-grid p { font-size: 20px; }
-      .contact-inner p { font-size: 22px; }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 32px; }
-      .hero-subtitle { font-size: 20px; }
-      .cap-grid { grid-template-columns: 1fr; }
-      .project-card { width: 280px; height: 400px; }
-      .contact-inner p { font-size: 18px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/interactions.css">
 </head>
 <body>
 
-  <!-- ════════ HERO ════════ -->
-  <div class="card-track" id="card-home">
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <!-- Frame: HOME PAGE (317:4638) = default state · v2 hero (317:4452) = selected state
+       js/main.js toggles .is-selected on a chip and fills the reserved
+       answer slot from js/data.js. -->
   <section class="hero" id="home">
-    <nav class="nav">
-      <a href="assets/resume.pdf" target="_blank">Resume</a>
-      <div class="nav-links">
-        <a href="#contact">Contact</a>
-        <a href="#projects">Projects</a>
-      </div>
-    </nav>
+    <img class="hero__bg" src="assets/gradient-hero.png" width="1440" height="897" alt="" aria-hidden="true">
 
-    <div class="hero-content">
-      <div class="hero-photo-wrapper">
-        <img src="assets/profile.png" alt="Noam Haviv portrait">
-      </div>
+    <div class="hero__stage">
 
-      <p class="hello font-hand">hello</p>
-      <h1>Product designer</h1>
-      <p class="hero-subtitle font-serif">
-        Passionate about research<br>
-        &amp; digital experience design.
-      </p>
+      <header class="nav">
+        <span class="nav__wordmark">Noam Haviv</span>
+        <nav class="nav__pill" aria-label="Main">
+          <a class="nav__link" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+          <a class="nav__link" href="#contact">Contact</a>
+          <a class="nav__link" href="#projects">Projects</a>
+        </nav>
+      </header>
 
-      <div class="hero-cta">
-        <a href="mailto:noam.haviv@joinbetter.com" class="btn-primary">
-          Get in touch
-          <span class="icon-circle">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="M22 4L12 13L2 4"/>
-            </svg>
-          </span>
-        </a>
-        <a href="https://linkedin.com" target="_blank" class="btn-linkedin" aria-label="LinkedIn">in</a>
+      <span class="hero__highlight" aria-hidden="true"></span>
+
+      <div class="hero__avatar">
+        <img class="hero__avatar-img" src="assets/avatar-48.png" width="48" height="48" alt="Noam Bracha Haviv">
+        <img class="hero__avatar-dot" src="assets/dot-status-13.svg" width="13" height="13" alt="" aria-hidden="true">
       </div>
 
-      <div class="chevron-down">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2154dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="7 3 12 8 17 3"/>
-          <polyline points="7 10 12 15 17 10"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-  </div><!-- /.card-track#card-home -->
+      <h1 class="hero__title">I'm <span class="hero__title-name">Noam Bracha Haviv.</span> Passionate <br>about research &amp; digital experience design. </h1>
 
-  <!-- ════════ SELECTED PROJECTS ════════ -->
-  <div class="card-track" id="card-projects">
-  <section class="projects-section" id="projects">
-    <p class="section-label">SELECTED PROJECT</p>
-
-    <div class="projects-grid">
-      <!-- Card 1 — Spello -->
-      <div class="project-card" style="border-color: #322929;">
-        <h3 class="font-serif">Spello</h3>
-        <p class="project-tagline">Designing meaningful language learning through music</p>
-        <p class="project-desc">A mobile app concept exploring how music can support memory, motivation, and language acquisition through experience based design.</p>
-      </div>
-
-      <!-- Card 2 — Better Health -->
-      <div class="project-card" style="background: #002C88;">
-        <div class="project-card-img" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122 60" fill="none" style="width:60%;max-width:180px;">
-            <text font-family="'TT Commons Pro','Manrope',sans-serif" font-weight="500" font-size="31.67" fill="#FFFFFF" letter-spacing="-1.58px" style="font-feature-settings:'dlig' 1">
-              <tspan x="0" y="24">Better </tspan>
-              <tspan x="0" y="49">Health</tspan>
-            </text>
-            <path d="M100.5 14.5C100.5 14.5 103 20 105.5 22.5C103 25 100.5 30.5 100.5 30.5C100.5 30.5 98 25 95.5 22.5C98 20 100.5 14.5 100.5 14.5Z" fill="#FFFFFF"/>
-          </svg>
+      <div class="hero__questions">
+        <div class="hero__questions-row">
+          <button class="chip" type="button" data-question="q1" aria-pressed="false">How do you approach projects</button>
+          <button class="chip" type="button" data-question="q2" aria-pressed="false">How has industrial design shaped your thinking?</button>
+          <button class="chip" type="button" data-question="q3" aria-pressed="false">What connects your projects?</button>
         </div>
-        <h3 class="font-serif" style="color:#FFFFFF;">Better health</h3>
-        <p class="project-tagline" style="color:rgba(255,255,255,0.75);">Designing scalable digital healthcare experiences</p>
-        <p class="project-desc" style="color:rgba(255,255,255,0.5);">Improving user journeys and onboarding experiences within a digital healthcare platform.</p>
+        <div class="hero__questions-row">
+          <button class="chip" type="button" data-question="q4" aria-pressed="false">What do you enjoy most about product design?</button>
+          <button class="chip" type="button" data-question="q5" aria-pressed="false">What did healthcare teach you?</button>
+          <button class="chip" type="button" data-question="q6" aria-pressed="false">What would surprise people about you?</button>
+        </div>
       </div>
 
-      <!-- Card 3 — Nest in City -->
-      <div class="project-card">
-        <h3 class="font-serif">Nest in city</h3>
-        <p class="project-tagline">Urban biodiversity system for wild bees</p>
-        <p class="project-desc">A research-driven modular system for urban biodiversity, internationally exhibited and published.</p>
+      <div class="hero__reply">
+        <!-- Reserved answer slot: the action row keeps its Figma position (y 714)
+             whether or not an answer is visible. -->
+        <div class="hero__answer-slot" aria-live="polite">
+          <article class="hero__answer" data-answer-for="" hidden>
+            <div class="hero__answer-avatar">
+              <img class="hero__answer-avatar-img" src="assets/avatar-25.png" width="25" height="25" alt="">
+              <img class="hero__answer-avatar-dot" src="assets/dot-status-7.svg" width="8" height="8" alt="" aria-hidden="true">
+            </div>
+            <div class="hero__answer-body"></div>
+          </article>
+        </div>
+
+        <div class="hero__actions">
+          <a class="chip chip--action chip--work" href="#projects">
+            <span class="chip__icon chip__icon--down"><img src="assets/icon-arrow-diag.svg" width="14" height="14" alt="" aria-hidden="true"></span>
+            see my work
+          </a>
+          <a class="chip chip--action chip--linkedin" href="https://www.linkedin.com/in/noam-bracha-haviv-6a7ba6267" target="_blank" rel="noopener">
+            <span class="chip__icon"><img src="assets/icon-arrow-diag.svg" width="14" height="14" alt="" aria-hidden="true"></span>
+            linkedin
+          </a>
+          <a class="chip chip--action chip--resume" href="assets/resume.pdf" target="_blank" rel="noopener">
+            <span class="chip__icon"><img src="assets/icon-arrow-diag.svg" width="14" height="14" alt="" aria-hidden="true"></span>
+            resume
+          </a>
+          <a class="chip chip--action chip--email" href="mailto:bekihaviv123@gmail.com">
+            <span class="chip__icon"><img src="assets/icon-arrow-diag.svg" width="14" height="14" alt="" aria-hidden="true"></span>
+            email
+          </a>
+        </div>
+      </div>
+
+      <p class="hero__disclaimer">Yes, this is a bot replying—but Noam reads every message. <a href="mailto:bekihaviv123@gmail.com">bekihaviv123@gmail.com</a></p>
+
+    </div>
+  </section>
+
+  <!-- ═════════════════════════════ PROJECTS ═════════════════════════════ -->
+  <section class="projects" id="projects">
+
+    <article class="project">
+      <div class="project__info">
+        <div class="project__text">
+          <p class="project__label">NEST IN CITY</p>
+          <div class="project__titlegroup">
+            <h2 class="project__title">Research-Driven <br>Product Design</h2>
+            <p class="project__desc">From field research and material exploration to prototyping, branding, UX/<wbr>UI, and a digital experience that extends the project beyond the physical product.</p>
+          </div>
+        </div>
+        <a class="btn-case" href="https://spellomusicapp-ai.github.io/nest-in-city/?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio&amp;fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaexOEuFmTODwq1Bq9iCEYxAgG5LSCU28WGH9qknYuus7qsatFTQlhqdOSqwlg_aem_O-GW4LVU3XDecelTFKencQ" target="_blank" rel="noopener noreferrer">open case study<img class="btn-case__icon" src="assets/icon-arrow-circle.svg" width="20" height="20" alt="" aria-hidden="true"></a>
+      </div>
+      <div class="project__media project__media--device">
+        <!-- MacBook mockup with the live Nest in City site on its screen.
+             The device is drawn in CSS (no image assets); the iframe is
+             rendered at a 1024px desktop width and scaled to the screen,
+             so the page reads as a real desktop site and scrolls on its own. -->
+        <div class="device">
+          <div class="device__lid">
+            <span class="device__camera" aria-hidden="true"></span>
+            <div class="device__screen">
+              <iframe class="device__frame"
+                      src="https://spellomusicapp-ai.github.io/nestincity-website/contact.html"
+                      title="Nest in City website"
+                      loading="lazy"
+                      referrerpolicy="no-referrer"></iframe>
+            </div>
+          </div>
+          <div class="device__base" aria-hidden="true"></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project__info">
+        <div class="project__text">
+          <p class="project__label">BETTER HEALTH</p>
+          <div class="project__titlegroup">
+            <h2 class="project__title project__title--narrow">Healthcare UX &amp; VR Onboarding</h2>
+            <p class="project__desc">Designing end-to-end digital experiences across patient onboarding, provider journeys, analytics, branding, and healthcare platforms.</p>
+          </div>
+        </div>
+        <a class="btn-case" href="#">open case study<img class="btn-case__icon" src="assets/icon-arrow-circle.svg" width="20" height="20" alt="" aria-hidden="true"></a>
+      </div>
+      <div class="project__media" role="img" aria-label="Better Health project media"></div>
+    </article>
+
+    <article class="project">
+      <div class="project__info">
+        <div class="project__text">
+          <p class="project__label">SPELLO MUSIC</p>
+          <div class="project__titlegroup">
+            <h2 class="project__title project__title--wide">Language Learning <br>Product Design</h2>
+            <p class="project__desc">Designing a music-based language learning experience that combines memory, pronunciation, and interactive practice.</p>
+          </div>
+        </div>
+        <a class="btn-case" href="#">open case study<img class="btn-case__icon" src="assets/icon-arrow-circle.svg" width="20" height="20" alt="" aria-hidden="true"></a>
+      </div>
+      <div class="project__media" role="img" aria-label="Spello Music project media"></div>
+    </article>
+
+  </section>
+
+  <!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
+  <section class="about" id="about">
+    <!-- track + pin exist only for the scroll-driven read-along (js/about.js).
+         Without JS they are display:contents, so the layout is unchanged. -->
+    <div class="about__track">
+      <div class="about__pin">
+        <div class="about__stage">
+          <span class="about__emoji about__emoji--laptop" aria-hidden="true"><span>💻</span></span>
+          <span class="about__emoji about__emoji--detective" aria-hidden="true"><span>🕵🏻‍♀️</span></span>
+          <span class="about__emoji about__emoji--sparkles" aria-hidden="true"><span>✨</span></span>
+          <span class="about__emoji about__emoji--bee" aria-hidden="true"><span>🐝</span></span>
+          <span class="about__emoji about__emoji--grad" aria-hidden="true"><span>🎓</span></span>
+
+        <p class="about__text"><span class="about__text-lead">I'm a research driven</span> <span class="about__text-body">product designer with a background in industrial design and a degree from Bezalel Academy of Arts and Design. I believe great design begins with understanding people, their context, and the problems worth solving. I turn research into meaningful digital experiences.</span></p>
+        </div>
       </div>
     </div>
   </section>
-  </div><!-- /.card-track#card-projects -->
 
-  <hr class="divider">
-
-  <!-- ════════ ABOUT ME ════════ -->
-  <div class="about-scroll-track">
-  <section class="about-section" id="about">
-    <span class="about-emoji-left">🕵🏻‍♀️</span>
-
-    <p class="section-label">ABOUT ME</p>
-
-    <p class="about-text">
-      <span class="highlight">I enjoy researching and</span> designing, bringing a background in industrial design and experience in developing digital products. I hold a degree in Product Design from Bezalel Academy of Arts and Design and come from a strong research foundation. I believe good design begins with a deep understanding of people and their context. Throughout my journey, I have worked on research driven projects addressing real human and environmental needs, from designing solutions for wild bees to developing a mobility solution for a child with cerebral palsy. I translate research insights into meaningful digital product experiences.
-    </p>
-
-    <div class="about-emojis-bottom">
-      <span>🐝</span>
-      <span>🎓</span>
-    </div>
-  </section>
-  </div><!-- /.about-scroll-track -->
-
-  <!-- ════════ CAPABILITIES ════════ -->
-  <div class="card-track" id="card-caps">
-  <section class="capabilities-section">
-    <h2>CAPABILITIES</h2>
-    <div class="cap-divider"></div>
-    <div class="cap-grid">
-      <p>User Research</p>
-      <p>UX Thinking</p>
-      <p>Digital<br>Product Design</p>
-      <p>Design Systems</p>
-      <p>AI-Assisted<br>Product Design</p>
-      <p>System Thinking</p>
-    </div>
-  </section>
-  </div><!-- /.card-track#card-caps -->
-
-  <!-- ════════ CONTACT / FOOTER ════════ -->
-  <section class="contact-section" id="contact">
-    <div class="contact-inner">
-      <p class="hello font-hand">Let's connect</p>
-      <p>If you're interested in working together or discussing product design opportunities, I'd love to hear from you!</p>
-
-      <div class="contact-buttons">
-        <a href="mailto:noam.haviv@joinbetter.com" class="contact-btn" aria-label="Email">
-          <svg viewBox="0 0 24 24">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="M22 4L12 13L2 4"/>
-          </svg>
-        </a>
-        <a href="https://linkedin.com" target="_blank" class="contact-btn linkedin" aria-label="LinkedIn">in</a>
+  <!-- ═══════════════════════════ CAPABILITIES ═══════════════════════════ -->
+  <section class="capabilities">
+    <div class="capabilities__panel">
+      <p class="capabilities__label">CAPABILITIES</p>
+      <span class="capabilities__rule" aria-hidden="true"></span>
+      <div class="capabilities__grid">
+        <div class="capabilities__row">
+          <p>Product Thinking</p>
+          <p>Research</p>
+          <p class="capabilities__cell--systems">Systems Thinking</p>
+        </div>
+        <div class="capabilities__row">
+          <p>UX/UI Design</p>
+          <p>AI-Assisted Design</p>
+          <p class="capabilities__cell--proto">Prototyping</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <script>
-    // ── CAPABILITIES: scroll-driven line draw + title reveal ──
-    (function () {
-      const section = document.querySelector('.capabilities-section');
-      if (!section) return;
-      const line  = section.querySelector('.cap-divider');
-      const title = section.querySelector('h2');
+  <!-- ═════════════════════════════ CONTACT ═════════════════════════════ -->
+  <footer class="contact" id="contact">
+    <img class="contact__bg" src="assets/gradient-footer.png" width="1440" height="423" alt="" aria-hidden="true">
 
-      // Set initial states
-      line.style.transformOrigin = 'left center';
-      line.style.transform       = 'scaleX(0)';
-      line.style.opacity         = '0';
-      line.style.willChange      = 'transform, opacity';
-      title.style.opacity        = '0';
-      title.style.transform      = 'translateY(60px)';
-      title.style.willChange     = 'opacity, transform';
+    <h2 class="contact__title">I'm currently looking for my next product design opportunity. Let's connect.</h2>
 
-      // Animation starts when section top hits 90% down the viewport,
-      // completes 600px later — slow enough to feel deliberate
-      const SCROLL_RANGE  = 600;
-      const START_OFFSET  = 0.9; // fraction of vh where animation begins
+    <div class="contact__actions">
+    <a class="btn-touch" href="mailto:bekihaviv123@gmail.com">
+      <span class="btn-touch__label">Get in touch</span>
+      <span class="btn-touch__icon">
+        <img class="btn-touch__icon-bg" src="assets/icon-mail-circle.svg" width="32" height="32" alt="" aria-hidden="true">
+        <img class="btn-touch__icon-glyph" src="assets/icon-mail.svg" width="24" height="24" alt="" aria-hidden="true">
+      </span>
+    </a>
 
-      function update() {
-        const rect    = section.getBoundingClientRect();
-        const vh      = window.innerHeight;
-        const scrolled = (vh * START_OFFSET) - rect.top;
-        const progress = Math.min(1, Math.max(0, scrolled / SCROLL_RANGE));
+    <a class="btn-in" href="https://www.linkedin.com/in/noam-bracha-haviv-6a7ba6267" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <img class="btn-in__bg" src="assets/icon-linkedin-circle.svg" width="55" height="56" alt="" aria-hidden="true">
+      <span class="btn-in__label">in</span>
+    </a>
+    </div>
 
-        // Line: fades in + draws left → right
-        line.style.transform = `scaleX(${progress.toFixed(4)})`;
-        line.style.opacity   = Math.min(1, progress * 2).toFixed(4); // fully opaque by halfway
+    <p class="contact__note">Open to Product Design &amp; UX/UI roles · Remote or on-site <img class="contact__note-heart" src="assets/icon-heart.svg" width="17" height="17" alt="" aria-hidden="true"></p>
+  </footer>
 
-        // Title: moves up from 60px below final position after line is ~50% drawn
-        const tp         = Math.min(1, Math.max(0, (progress - 0.5) / 0.5));
-        const translateY = 60 * (1 - tp);
-        // Only fade in once title is within 20px of its final position (the gap to the line)
-        const opacityP   = Math.min(1, Math.max(0, (tp - 2 / 3) / (1 / 3)));
-        title.style.opacity   = opacityP.toFixed(4);
-        title.style.transform = `translateY(${translateY.toFixed(2)}px)`;
-      }
-
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update, { passive: true });
-      update();
-    })();
-    // ── SCROLL-DRIVEN WORD REVEAL for About section ──
-    // Strategy: sticky scroll-track. The section sticks to top:0 while the
-    // user scrolls through an extended track container. We map px-scrolled-
-    // into-the-track → word index. Exactly 1 word per PX_PER_WORD pixels.
-    (function () {
-      const para  = document.querySelector('.about-text');
-      const track = document.querySelector('.about-scroll-track');
-      if (!para || !track) return;
-
-      const PX_PER_WORD = 40; // pixels of scroll to reveal one word
-
-      // ── 1. Wrap every word in <span class="word"> ──
-      function wrapWords(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const parts = node.textContent.split(/(\s+)/);
-          const frag  = document.createDocumentFragment();
-          parts.forEach(part => {
-            if (/^\s+$/.test(part) || part === '') {
-              frag.appendChild(document.createTextNode(part));
-            } else {
-              const span = document.createElement('span');
-              span.className = 'word';
-              span.textContent = part;
-              frag.appendChild(span);
-            }
-          });
-          node.parentNode.replaceChild(frag, node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          Array.from(node.childNodes).forEach(wrapWords);
-        }
-      }
-
-      wrapWords(para);
-
-      const words = Array.from(para.querySelectorAll('.word'));
-      const total = words.length;
-
-      // ── 2. Set track height = section height + scroll runway ──
-      function setTrackHeight() {
-        const section = document.getElementById('about');
-        track.style.height = (section.offsetHeight + total * PX_PER_WORD) + 'px';
-      }
-      setTrackHeight();
-      window.addEventListener('resize', setTrackHeight);
-
-      // ── 3. On scroll: map px scrolled past track top → word index ──
-      function revealWords() {
-        const trackTop = track.getBoundingClientRect().top;
-        // scrolled = how many px we've scrolled into the track past its top edge
-        const scrolled    = Math.max(0, -trackTop);
-        const revealUpTo  = Math.min(total, Math.floor(scrolled / PX_PER_WORD));
-
-        words.forEach((w, i) => {
-          w.classList.toggle('revealed', i < revealUpTo);
-        });
-      }
-
-      window.addEventListener('scroll', revealWords, { passive: true });
-      revealWords(); // initialise on load
-    })();
-
-    // ── STACKING CARD SHRINK EFFECT ──
-    // Each .card-track holds one sticky section. As the user scrolls through
-    // the extra "shrink runway" height beyond the section's natural height,
-    // scale + opacity are driven directly by scroll position — zero time-based animation.
-    (function () {
-      const SHRINK_RUNWAY = 400; // px of extra scroll space for the shrink
-      const EFFECT_START  = 0.7; // fraction of runway before effect begins (0–1)
-      const MIN_SCALE     = 0.88;
-      const MIN_OPACITY   = 0.85;
-      let ticking = false;
-
-      const tracks = [document.getElementById('card-home')].filter(Boolean);
-
-      // ── Set each card-track height = section height + shrink runway ──
-      function setHeights() {
-        tracks.forEach(track => {
-          const section = track.querySelector(':scope > section');
-          if (!section) return;
-          track.style.height = (section.offsetHeight + SHRINK_RUNWAY) + 'px';
-        });
-      }
-
-      // ── Map scroll progress through runway → scale + opacity ──
-      // The sticky section is held at top:0 for exactly SHRINK_RUNWAY px of scroll
-      // (track.height - section.height = SHRINK_RUNWAY).
-      // We drive the effect directly from how far the track's top has moved above 0.
-      function updateShrink() {
-        tracks.forEach(track => {
-          const section = track.querySelector(':scope > section');
-          if (!section) return;
-
-          const trackTop = track.getBoundingClientRect().top;
-
-          // Effect only starts after EFFECT_START fraction of the runway
-          const scrolled      = Math.max(0, -trackTop);
-          const effectOffset  = SHRINK_RUNWAY * EFFECT_START;
-          const effectRange   = SHRINK_RUNWAY * (1 - EFFECT_START);
-          const progress      = Math.min(1, Math.max(0, (scrolled - effectOffset) / effectRange));
-
-          section.style.transform    = `scale(${(1 - (1 - MIN_SCALE)   * progress).toFixed(4)})`;
-          section.style.opacity      =         (1 - (1 - MIN_OPACITY) * progress).toFixed(4);
-          section.style.borderRadius = `${(progress * 32).toFixed(1)}px`;
-        });
-        ticking = false;
-      }
-
-      function onScroll() {
-        if (!ticking) {
-          requestAnimationFrame(updateShrink);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('load', () => { setHeights(); updateShrink(); });
-      window.addEventListener('resize', setHeights, { passive: true });
-      window.addEventListener('scroll', onScroll,  { passive: true });
-    })();
-  </script>
-
+  <script src="js/data.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/about.js" defer></script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/capabilities.js" defer></script>
 </body>
 </html>

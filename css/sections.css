@@ -1,0 +1,433 @@
+/* ============================================================
+   Sections — desktop (1440px source of truth)
+   Vertical map from Figma "v2" (317:4450), total height 5465:
+     hero          0 → 897
+     projects    897 → 2937   (3 × 680)
+     about      2957 → 3823   (866, 20px gap above)
+     capabilities 3823 → 4575  (542 panel + 105 padding)
+     contact    4715 → 5465   (750, 140px gap above)
+   ============================================================ */
+
+/* ═══════════════════════════ HERO ═══════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 897px;
+  overflow: hidden;
+  background: var(--c-white);
+}
+
+/* Flattened gradient exported from Figma (mask group 317:4453) */
+.hero__bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-width: var(--canvas-width);
+  height: 897px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero__stage {
+  position: relative;
+  width: var(--canvas-width);
+  height: 897px;
+  margin: 0 auto;
+}
+
+/* ── Nav (Figma: y 2, padding 33/120) ───────────────────────── */
+.nav {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: var(--canvas-width);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 33px var(--gutter);
+  font-size: var(--fs-body);
+}
+
+.nav__wordmark { white-space: nowrap; }
+
+/* ── Headline block ─────────────────────────────────────────── */
+.hero__highlight {
+  position: absolute;
+  left: 300px;
+  top: 194px;
+  width: 507px;
+  height: 62px;
+  background: var(--c-highlight);
+}
+
+.hero__title {
+  position: absolute;
+  left: 224px;
+  top: 190px;
+  font-weight: 500;
+  font-size: var(--fs-hero);
+  line-height: normal;
+  color: var(--c-black);
+  white-space: pre;
+}
+
+.hero__avatar {
+  position: absolute;
+  left: 163px;
+  top: 201px;
+  width: 48px;
+  height: 48px;
+}
+
+.hero__avatar-img { width: 48px; height: 48px; }
+
+.hero__avatar-dot {
+  position: absolute;
+  left: 31px;
+  top: 35px;
+  width: 13px;
+  height: 13px;
+}
+
+/* ── Question chips (Figma: y 367, 2 rows, gap 24) ─────────── */
+.hero__questions {
+  position: absolute;
+  left: 50%;
+  top: 367px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.hero__questions-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Answer + actions (Figma: 840 wide block at 293 / 552) ─── */
+.hero__reply {
+  position: absolute;
+  left: 293px;
+  top: 552px;
+  width: 840px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Reserves the answer height so the action row keeps its y = 714 */
+.hero__answer-slot { min-height: 132px; }
+
+.hero__answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  width: 100%;
+  /* 132 total incl. the 1px border, matching Figma's inside stroke:
+     1 + 17 padding + 96 (4 × 24 text) + 17 + 1 = 132 */
+  height: 132px;
+  padding: 17px 16px;
+  background: var(--c-white);
+  border: var(--bw-hairline) solid var(--c-border-card);
+  border-radius: 8px 19px 21px 21px;
+}
+
+.hero__answer-avatar {
+  position: relative;
+  flex: none;
+  width: 25px;
+  height: 25px;
+}
+
+.hero__answer-avatar-img { width: 25px; height: 25px; }
+
+.hero__answer-avatar-dot {
+  position: absolute;
+  left: 15.67px;
+  top: 17.75px;
+  width: 7.729px;
+  height: 7.729px;
+}
+
+/* Figma: the text column is 767 wide inside the 840 card */
+.hero__answer-body { width: 767px; }
+
+.hero__answer-text {
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-black);
+}
+
+/* Multi-paragraph answers (js/data.js); single-paragraph answers,
+   which is what Figma shows, are unaffected. */
+.hero__answer-text + .hero__answer-text { margin-top: 12px; }
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Disclaimer (Figma: y 784, 11px) ───────────────────────── */
+.hero__disclaimer {
+  position: absolute;
+  left: 467px;
+  top: 784px;
+  font-size: var(--fs-micro);
+  line-height: normal;
+  color: var(--c-text-faint);
+  white-space: nowrap;
+}
+
+.hero__disclaimer a { text-decoration: underline; }
+
+/* ═════════════════════════ PROJECTS ═════════════════════════ */
+.project {
+  width: var(--canvas-width);
+  height: var(--h-project-block);
+  margin: 0 auto;
+  padding: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 195px;
+}
+
+.project__info {
+  flex: none;
+  width: 333px;
+  height: 361px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 45px;
+}
+
+.project__text {
+  height: 279px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 45px;
+}
+
+.project__label {
+  font-weight: 500;
+  font-size: var(--fs-body);
+  letter-spacing: 2.24px;
+  line-height: normal;
+  color: var(--c-text-muted);
+}
+
+.project__titlegroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project__title {
+  width: 266px;
+  font-weight: 500;
+  font-size: var(--fs-heading);
+  line-height: normal;
+  color: var(--c-black);
+  white-space: pre-wrap;
+}
+
+.project__title--wide { width: 333px; }
+
+.project__desc {
+  width: 333px;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-text-muted);
+}
+
+.project__media {
+  flex: none;
+  width: 671px;
+  height: 440px;
+  background: var(--c-surface);
+  border-radius: var(--r-panel);
+}
+
+/* ══════════════════════════ ABOUT ═══════════════════════════ */
+.about {
+  position: relative;
+  width: 1438px;
+  height: 866px;
+  margin: 20px auto 0;
+  overflow: hidden;
+}
+
+.about__stage {
+  position: absolute;
+  left: 128.91px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1148.086px;
+  height: 610.067px;
+}
+
+.about__text {
+  position: absolute;
+  left: 16.083px;
+  top: 204.003px;
+  width: 1115px;
+  font-weight: 500;
+  font-size: var(--fs-heading);
+  line-height: normal;
+  text-align: center;
+}
+
+.about__text-lead { color: var(--c-black); }
+.about__text-body { color: var(--c-text-ghost); }
+
+.about__emoji {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  text-align: center;
+}
+
+.about__emoji > span { display: block; }
+
+.about__emoji--laptop    { left: 0.004px;   top: 41.47px; width: 113.212px; height: 134.84px; }
+.about__emoji--detective { left: 443.086px; top: 6px;     width: 148.194px; height: 148.194px; }
+.about__emoji--sparkles  { left: 950.082px; top: 0;       width: 143.416px; height: 143.416px; }
+.about__emoji--bee       { left: 188.087px; top: 475px;   width: 104.586px; height: 103.647px; }
+.about__emoji--grad      { left: 839.087px; top: 444px;   width: 166.067px; height: 166.067px; }
+
+.about__emoji--laptop > span    { font-size: calc(98.449px * var(--emoji-scale)); transform: rotate(-19.09deg); }
+.about__emoji--detective > span { font-size: calc(120.635px * var(--emoji-scale)); transform: rotate(-15deg); }
+.about__emoji--sparkles > span  { font-size: calc(120.635px * var(--emoji-scale)); transform: rotate(11.94deg); }
+.about__emoji--bee > span       { font-size: calc(98.449px * var(--emoji-scale));  transform: rotate(3.37deg); }
+.about__emoji--grad > span      { font-size: calc(120.635px * var(--emoji-scale)); transform: rotate(31.04deg); }
+
+/* ═══════════════════════ CAPABILITIES ═══════════════════════ */
+.capabilities {
+  width: 1438px;
+  margin: 0 auto;
+  padding: 105px var(--gutter);
+}
+
+.capabilities__panel {
+  position: relative;
+  width: 100%;
+  height: 542px;
+  background: var(--c-surface);
+  border-radius: var(--r-panel);
+  overflow: hidden;
+}
+
+.capabilities__label {
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: 120px;
+  transform: translateX(-50%);
+  width: 311px;
+  height: 45px;
+  font-weight: 500;
+  font-size: var(--fs-heading);
+  line-height: normal;
+  color: var(--c-label-caps);
+  text-align: center;
+}
+
+.capabilities__rule {
+  position: absolute;
+  left: 50%;
+  top: 191px;
+  transform: translateX(-50%);
+  width: 986px;
+  height: 8px;
+  background: var(--c-ink);
+  border-radius: var(--r-rule);
+}
+
+.capabilities__grid {
+  position: absolute;
+  left: 50%;
+  top: 247px;
+  transform: translateX(-50%);
+  width: 986px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 85px;
+  font-weight: 500;
+  font-size: var(--fs-heading);
+  line-height: normal;
+  color: var(--c-ink);
+  text-align: center;
+}
+
+.capabilities__row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.capabilities__row:first-child { gap: 156px; }
+.capabilities__row:last-child  { gap: 163px; }
+
+.capabilities__row p { flex: none; white-space: nowrap; }
+.capabilities__cell--systems { width: 292px; }
+.capabilities__cell--proto   { width: 183px; }
+
+/* ════════════════════════ CONTACT ═══════════════════════════ */
+.contact {
+  position: relative;
+  width: 100%;
+  height: 750px;
+  margin-top: 140px;
+  overflow: hidden;
+}
+
+/* Flattened gradient exported from Figma (group 317:4590), bottom-aligned */
+.contact__bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-width: var(--canvas-width);
+  height: 423px;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.contact__title {
+  position: absolute;
+  left: 50%;
+  top: 168px;
+  transform: translateX(-50%);
+  width: 1162px;
+  font-weight: 500;
+  font-size: var(--fs-contact);
+  line-height: normal;
+  color: var(--c-ink-contact);
+  text-align: center;
+}
+
+.contact__note {
+  position: absolute;
+  left: calc(50% - 429px);
+  top: 685px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-text-ghost-soft);
+  white-space: nowrap;
+}
+
+.contact__note-heart { width: 17px; height: 17px; }

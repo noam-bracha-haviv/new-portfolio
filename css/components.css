@@ -1,0 +1,280 @@
+/* ============================================================
+   Reusable components
+   chip · nav pill · case-study button · contact buttons · avatar
+   ============================================================ */
+
+/* ── Chip ────────────────────────────────────────────────────
+   One primitive, three uses: question chip, action chip, nav pill.
+   Figma: h 37 · radius 18 · border 1.5 #d9d9d9 · padding 4/12 · 16px
+   ─────────────────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--h-chip);
+  padding: 4px 12px;
+  background: var(--c-white);
+  border: var(--bw-chip) solid var(--c-border);
+  border-radius: var(--r-chip);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-black);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Selected question state (Figma: v2 hero, chip 3) */
+.chip.is-selected {
+  background: var(--c-black);
+  color: var(--c-white);
+}
+
+/* Action chips: fixed Figma widths, icon + label with a 9px gap */
+.chip--action {
+  gap: 9px;
+  padding: 4px 0;
+}
+
+.chip--work     { width: 174px; }
+.chip--linkedin { width: 109px; }
+.chip--resume   { width: 118px; }
+.chip--email    { width: 95px; }
+
+.chip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 13.111px;
+  height: 13.111px;
+}
+
+.chip__icon img {
+  width: 13.111px;
+  height: 13.111px;
+}
+
+/* "see my work": the same arrow rotated 45° inside its rotated bounds */
+.chip__icon--down {
+  width: 18.542px;
+  height: 18.542px;
+}
+
+.chip__icon--down img { transform: rotate(45deg); }
+
+/* ── Nav pill ────────────────────────────────────────────────
+   Figma: radius 22 · border 1 #d9d9d9 · padding 8/18 · gap 32 · items 67px
+   ─────────────────────────────────────────────────────────── */
+.nav__pill {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 8px 18px;
+  background: var(--c-white);
+  border: var(--bw-hairline) solid var(--c-border);
+  border-radius: var(--r-nav);
+}
+
+.nav__link {
+  width: 67px;
+  font-size: var(--fs-body);
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* ── Case-study button ───────────────────────────────────────
+   Figma: black pill 195 × 37 · radius 18 · gap 9 · 20px icon
+   ─────────────────────────────────────────────────────────── */
+.btn-case {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 195px;
+  height: var(--h-chip);
+  padding: 4px 0;
+  background: var(--c-black);
+  border-radius: var(--r-chip);
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-white);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.btn-case__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* ── "Get in touch" ──────────────────────────────────────────
+   169 × 56 · #2154dd fill · no border · radius 30
+   ─────────────────────────────────────────────────────────── */
+.btn-touch {
+  position: absolute;
+  left: calc(50% - 125px);
+  top: 347px;
+  width: 169px;
+  height: 56px;
+  background: var(--c-touch);
+  border-radius: var(--r-touch);
+}
+
+/* Content group sits at x 615 (Figma), 140 wide, vertically centred */
+.btn-touch__label,
+.btn-touch__icon { position: absolute; top: 50%; }
+
+.btn-touch__label {
+  left: 19px;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-white);
+  white-space: nowrap;
+}
+
+.btn-touch__icon {
+  left: 127px;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+}
+
+.btn-touch__icon-bg {
+  width: 32px;
+  height: 32px;
+}
+
+.btn-touch__icon-glyph {
+  position: absolute;
+  left: 6px;
+  top: 7.5px;
+  width: 20.0004px;
+  height: 17px;
+}
+
+/* ── LinkedIn circle ─────────────────────────────────────────
+   55 × 56 ellipse · #2154dd fill · no stroke
+   ─────────────────────────────────────────────────────────── */
+.btn-in {
+  position: absolute;
+  left: calc(50% + 70px);
+  top: 347px;
+  width: 55px;
+  height: 56px;
+}
+
+.btn-in__bg {
+  width: 55px;
+  height: 56px;
+}
+
+.btn-in__label {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-linkedin);
+  line-height: normal;
+  color: var(--c-white);
+}
+
+/* ── MacBook mockup ──────────────────────────────────────────
+   Drawn in CSS, no image assets. Sized to sit inside the 671 × 440
+   project media panel with comfortable margins: 560 wide lid, 612
+   wide base, 372 tall overall → ~30px of breathing room all round.
+   The panel itself keeps its exact Figma size; only its contents
+   changed. js/projects.js keeps --device-scale in step with the
+   panel below 1440 so the device always fits.
+   ─────────────────────────────────────────────────────────── */
+.project__media--device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2; /* above the row's stretched link, so the screen is usable */
+  /* transform carries the fit-to-panel factor (changes only on resize);
+     the independent `scale` property carries the hover zoom, so the two
+     compose without fighting and the zoom transitions reliably. */
+  transform: scale(var(--device-scale, 1));
+  transform-origin: center center;
+  scale: 1;
+  transition: scale var(--t-proj-hover, 420ms)
+              var(--e-proj, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+.device__lid {
+  position: relative;
+  width: 560px;
+  height: 361px;
+  padding: 10px;
+  border-radius: 15px 15px 4px 4px;
+  background: linear-gradient(#33333a, #17171a 62%, #0e0e10);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+              0 26px 44px -22px rgba(24, 20, 20, 0.5);
+}
+
+.device__camera {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #4a4a52;
+}
+
+.device__screen {
+  position: relative;
+  width: 540px;
+  height: 341px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--c-white);
+}
+
+/* Rendered at a 1024px desktop width, then scaled to the screen:
+   540 / 1024 = 0.52734, so 647 × 0.52734 = 341, the screen height. */
+.device__frame {
+  width: 1024px;
+  height: 647px;
+  border: 0;
+  transform: scale(0.52734);
+  transform-origin: top left;
+}
+
+.device__base {
+  width: 612px;
+  height: 11px;
+  position: relative;
+  border-radius: 0 0 9px 9px;
+  background: linear-gradient(#e6e7eb, #bcbdc4 55%, #9a9ba3);
+  box-shadow: 0 10px 18px -10px rgba(24, 20, 20, 0.35);
+}
+
+/* Trackpad lip */
+.device__base::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 98px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 0 0 5px 5px;
+  background: linear-gradient(#a8a9b1, #cbccd2);
+}

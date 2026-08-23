@@ -1,0 +1,313 @@
+/* ============================================================
+   Responsive layer
+   The 1440px desktop layout above is the Figma source of truth and is
+   left untouched. Below 1440 the absolutely-composed blocks fall back
+   into flow, keeping the same hierarchy and visual language.
+   ============================================================ */
+
+@media (max-width: 1439px) {
+
+  /* ───────────────────────────── HERO ───────────────────────── */
+  .hero { height: auto; }
+
+  .hero__bg {
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero__stage {
+    width: 100%;
+    height: auto;
+    padding: 0 40px 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav {
+    position: static;
+    width: 100%;
+    padding: 24px 0 0;
+  }
+
+  /* The highlight becomes an inline background on the name */
+  .hero__highlight { display: none; }
+
+  .hero__title-name {
+    background: var(--c-highlight);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .hero__avatar {
+    position: relative; /* keeps the status dot anchored to the avatar */
+    left: auto;
+    top: auto;
+    margin: 56px auto 20px;
+  }
+
+  .hero__title {
+    position: static;
+    max-width: 900px;
+    font-size: clamp(28px, 3.6vw, 48px);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .hero__title br { display: none; }
+
+  .hero__questions {
+    position: static;
+    transform: none;
+    margin-top: 44px;
+    width: 100%;
+  }
+
+  .hero__questions-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero__reply {
+    position: static;
+    width: 100%;
+    max-width: 840px;
+    margin-top: 44px;
+  }
+
+  .hero__answer-slot { min-height: 0; }
+
+  .hero__answer-body { width: auto; }
+
+  .hero__actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero__disclaimer {
+    position: static;
+    margin-top: 28px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* ─────────────────────────── PROJECTS ─────────────────────── */
+  .project {
+    width: 100%;
+    height: auto;
+    padding: 80px 40px;
+    gap: 64px;
+  }
+
+  .project__info {
+    flex: 1 1 320px;
+    width: auto;
+    height: auto;
+    gap: 40px;
+  }
+
+  .project__text { height: auto; }
+
+  .project__title,
+  .project__desc { width: auto; }
+
+  .project__title { white-space: normal; }
+  .project__title br { display: none; }
+
+  .project__media {
+    flex: 1 1 420px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 671 / 440;
+  }
+
+  /* ──────────────────────────── ABOUT ───────────────────────── */
+  .about {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 96px 40px;
+  }
+
+  .about__stage {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+  }
+
+  .about__text {
+    position: static;
+    width: 100%;
+    font-size: clamp(20px, 2.4vw, 30px);
+  }
+
+  .about__emoji {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .about__emoji > span {
+    width: auto !important;
+    height: auto !important;
+    font-size: clamp(calc(44px * var(--emoji-scale)), calc(7vw * var(--emoji-scale)), calc(98px * var(--emoji-scale))) !important;
+  }
+
+  .about__emoji--laptop    { left: 0;    top: 0;    }
+  .about__emoji--detective { left: 38%;  top: 0;    }
+  .about__emoji--sparkles  { left: auto; right: 0; top: 0; }
+  .about__emoji--bee       { left: 14%;  top: auto; bottom: 0; }
+  .about__emoji--grad      { left: auto; right: 6%; top: auto; bottom: 0; }
+
+  /* ─────────────────────── CAPABILITIES ─────────────────────── */
+  .capabilities {
+    width: 100%;
+    padding: 0 40px 96px;
+  }
+
+  .capabilities__panel {
+    height: auto;
+    padding: 64px 40px;
+  }
+
+  .capabilities__label,
+  .capabilities__rule,
+  .capabilities__grid {
+    position: static;
+    width: 100%;
+    transform: none;
+  }
+
+  .capabilities__label {
+    height: auto;
+    margin-bottom: 28px;
+  }
+
+  .capabilities__rule {
+    display: block;
+    margin-bottom: 48px;
+  }
+
+  .capabilities__grid {
+    gap: 48px;
+    font-size: clamp(20px, 2.2vw, 30px);
+  }
+
+  .capabilities__row {
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .capabilities__row:first-child,
+  .capabilities__row:last-child { gap: 24px; }
+
+  .capabilities__cell--systems,
+  .capabilities__cell--proto { width: auto; }
+
+  .capabilities__row p { flex: 0 1 auto; }
+
+  /* ─────────────────────────── CONTACT ──────────────────────── */
+  .contact {
+    height: auto;
+    margin-top: 0;
+    padding: 120px 40px 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+  }
+
+  .contact__bg {
+    height: 56%;
+    min-width: 0;
+  }
+
+  .contact__title {
+    position: static;
+    width: 100%;
+    max-width: 1162px;
+    transform: none;
+    font-size: clamp(24px, 3.4vw, 40px);
+  }
+
+  .contact__actions {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .btn-touch,
+  .btn-in {
+    position: relative;
+    left: auto;
+    top: auto;
+    flex: none;
+  }
+
+  .contact__note {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 32px;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+/* ───────── Tablet: stack the project rows ───────── */
+@media (max-width: 900px) {
+  .project {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+    padding: 64px 24px;
+  }
+
+  .project__media { flex: none; width: 100%; }
+
+  .about,
+  .capabilities { padding-left: 24px; padding-right: 24px; }
+
+  .capabilities__row {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .capabilities__row p { white-space: normal; text-align: center; }
+
+  .about__stage { min-height: 420px; }
+}
+
+/* ───────── Mobile ───────── */
+@media (max-width: 640px) {
+  .hero__stage { padding: 0 20px 56px; }
+
+  .nav { flex-direction: column; gap: 16px; }
+
+  .hero__avatar { margin-top: 40px; }
+
+  .chip { white-space: normal; height: auto; min-height: var(--h-chip); text-align: center; }
+
+  .hero__questions-row { gap: 12px; }
+  .hero__questions { gap: 12px; }
+  .hero__actions { gap: 12px; }
+
+  .about__emoji > span { font-size: clamp(calc(34px * var(--emoji-scale)), calc(11vw * var(--emoji-scale)), calc(56px * var(--emoji-scale))) !important; }
+  .about__stage { min-height: 380px; }
+
+  .capabilities__panel { padding: 48px 24px; }
+
+  .contact { padding: 88px 20px 56px; }
+  .contact__actions { gap: 16px; }
+}

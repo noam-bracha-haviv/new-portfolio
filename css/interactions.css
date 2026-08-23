@@ -1,0 +1,407 @@
+/* ============================================================
+   Hero interactions — motion only.
+   Loaded last so it layers on top of the approved visual rules
+   without changing any of their values. Every animation here
+   resolves to the Figma-designed resting state.
+   ============================================================ */
+
+:root {
+  /* Highlight marker sweep */
+  --t-highlight: 1300ms; /* +24% over the first pass, for a calmer sweep */
+  --t-highlight-delay: 350ms;
+  --e-highlight: cubic-bezier(0.16, 0.84, 0.44, 1);
+
+  /* Answer swap */
+  --t-answer-in: 240ms;
+  --t-answer-out: 140ms;
+  --e-answer: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Ambient gradient drift */
+  --t-drift: 34s;
+}
+
+/* ═════════════════ 1 · Yellow highlight sweep ═════════════════
+   The headline text is painted by .hero__title and is never touched;
+   only the yellow rectangle behind it is revealed, left to right,
+   once on load. clip-path keeps the rectangle's edges crisp and the
+   final frame is pixel-identical to the static Figma rect.
+   ────────────────────────────────────────────────────────────── */
+@keyframes hero-highlight-sweep {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.hero__highlight {
+  animation: hero-highlight-sweep var(--t-highlight) var(--e-highlight)
+             var(--t-highlight-delay) both;
+}
+
+/* Below 1440 the highlight is an inline background on the name
+   (see responsive.css) — sweep that instead, same timing. */
+@media (max-width: 1439px) {
+  @keyframes hero-highlight-sweep-inline {
+    from { background-size: 0% 100%; }
+    to   { background-size: 100% 100%; }
+  }
+
+  .hero__title-name {
+    background: linear-gradient(var(--c-highlight), var(--c-highlight)) no-repeat left center;
+    background-size: 100% 100%;
+    animation: hero-highlight-sweep-inline var(--t-highlight) var(--e-highlight)
+               var(--t-highlight-delay) both;
+  }
+}
+
+/* ═══════════════ 2 · Ambient gradient drift ═══════════════════
+   A single compositor-only transform on the exported gradient:
+   no colour, opacity, filter or blend change, so the Figma palette
+   is untouched. The image is held slightly over-scaled at every
+   keyframe so the drift can never expose a hero edge.
+   ────────────────────────────────────────────────────────────── */
+@keyframes hero-gradient-drift {
+  0%   { transform: scale(1.045) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.06) translate3d(-0.55%, 0.5%, 0); }
+  100% { transform: scale(1.05) translate3d(0.5%, -0.45%, 0); }
+}
+
+.hero__bg {
+  transform-origin: center center;
+  animation: hero-gradient-drift var(--t-drift) ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* ═════════════════ 3 · Q&A answer swap ═══════════════════════
+   The slot already reserves the card's 132px, so showing, hiding or
+   replacing an answer never moves the action row or anything else.
+   ────────────────────────────────────────────────────────────── */
+.hero__answer {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--t-answer-in) var(--e-answer),
+              transform var(--t-answer-in) var(--e-answer);
+}
+
+/* Fading out before the content is replaced */
+.hero__answer.is-leaving {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition-duration: var(--t-answer-out), var(--t-answer-out);
+}
+
+/* Start frame for the incoming answer */
+.hero__answer.is-entering {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: none;
+}
+
+/* Hero answers are written to fit the designed 132px card (see the
+   heroAnswer entries in js/data.js), so no scrollbar is ever shown.
+   auto is kept purely as a safety valve against text reflow. */
+.hero__answer {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Chip selection: colour only, no geometry, so nothing reflows. */
+.chip {
+  transition: background-color 180ms var(--e-answer),
+              color 180ms var(--e-answer);
+}
+
+/* ═══════════════════ Reduced motion ══════════════════════════
+   Everything jumps straight to its designed resting state.
+   ────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero__highlight {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+  }
+
+  .hero__title-name {
+    animation: none;
+    background-size: 100% 100%;
+  }
+
+  .hero__bg {
+    animation: none;
+    transform: none;
+  }
+
+  .hero__answer,
+  .hero__answer.is-leaving,
+  .hero__answer.is-entering,
+  .chip {
+    transition: none;
+  }
+
+  .hero__answer.is-leaving,
+  .hero__answer.is-entering {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ════════════ 4 · About read-along (scroll-driven) ════════════
+   The section pins while a scroll distance is consumed; that
+   distance drives the word-by-word reveal and the five emoji
+   entrances. Everything is a pure function of scroll position —
+   no timers, and scrolling back reverses it.
+
+   Without JS (or with reduced motion) js/about.js never adds
+   .about--scrollreveal, the track and pin stay display:contents,
+   and the section renders exactly as designed in Figma.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  --about-reveal: 130vh;   /* scroll distance consumed while pinned */
+  --c-word-unread: rgba(85, 85, 85, 0.46);
+  --c-word-read: #000;
+}
+
+.about__track,
+.about__pin { display: contents; }
+
+/* .about--pinned is added by js/about.js only at >= 1024px. Below that
+   the reveal still runs, driven by the section crossing the viewport,
+   but the section is not pinned. */
+.about--pinned {
+  height: auto;
+  overflow: visible;
+}
+
+.about--pinned .about__track {
+  display: block;
+  height: calc(100vh + var(--about-reveal));
+}
+
+.about--pinned .about__pin {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Word spans are created by js/about.js. They are inline and keep the
+   original spacing, so line breaking is identical to the static design. */
+.about--scrollreveal .about__word {
+  color: var(--c-word-unread);
+  will-change: color;
+}
+
+/* Emoji start clearly small, just below their designed spot and
+   invisible; the wrapper carries the entrance, the inner span keeps
+   its Figma rotation and size. Values mirror js/about.js. */
+.about--scrollreveal .about__emoji {
+  opacity: 0;
+  transform: translateY(11px) scale(0.57);
+  will-change: opacity, transform;
+}
+
+/* The glyph keeps its own rotation; the wrapper carries the arrival, so
+   the two compose into "settles into its designed tilt". */
+.about--scrollreveal .about__emoji > span { will-change: auto; }
+
+/* ═══════════ 5 · Capabilities reveal (scroll-driven) ══════════
+   The section assembles as it scrolls into view: the divider draws
+   left to right, the title rises in once the line is half drawn,
+   then the six labels follow one after another. Progress is the
+   only input — no timers, and scrolling back reverses it.
+
+   js/capabilities.js writes only --draw / --in / --rise, so the
+   composed transforms (and the responsive variants below) stay
+   owned by CSS. Without JS, or with reduced motion, the class is
+   never added and the section renders exactly as designed.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  --caps-title-rise: 56px;
+  --caps-skill-rise: 12px;
+}
+
+/* Divider: the bar sits at full length and is clipped from the right,
+   so the left end is fixed by construction and the stroke keeps its
+   real thickness and cap shape while the right edge travels — a pen
+   laying ink down, not a shape being scaled. */
+.capabilities--reveal .capabilities__rule {
+  clip-path: inset(0 calc((1 - var(--draw, 0)) * 100%) 0 0);
+  will-change: clip-path;
+}
+
+.capabilities--reveal .capabilities__label {
+  opacity: var(--in, 0);
+  transform: translateX(-50%) translateY(var(--rise, var(--caps-title-rise)));
+  will-change: opacity, transform;
+}
+
+.capabilities--reveal .capabilities__row p {
+  opacity: var(--in, 0);
+  transform: translateY(var(--rise, var(--caps-skill-rise)));
+  will-change: opacity, transform;
+}
+
+/* Below 1440 these elements are in flow and are not centred with a
+   translate, so the composed transforms drop the translateX. */
+@media (max-width: 1439px) {
+  .capabilities--reveal .capabilities__label {
+    transform: translateY(var(--rise, var(--caps-title-rise)));
+  }
+}
+
+/* ══════════════ 6 · Projects (entrance + hover) ═══════════════
+   Each row behaves as one card: a stretched link makes the whole
+   row clickable through the real "open case study" anchor, so the
+   destination lives in one place (its href) and stays keyboard
+   accessible. Entrance values come from js/projects.js as
+   --reveal-in / --reveal-y and compose with the hover lift, so the
+   two never fight over `transform`.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  --proj-rise: 26px;
+  --proj-lift: -2px;
+  --proj-media-zoom: 1.025;
+  --t-proj-hover: 420ms;
+  --e-proj: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.project {
+  position: relative; /* containing block for the stretched link */
+  cursor: pointer;
+}
+
+/* The button's overlay covers the row — one link, one destination.
+   z-index keeps it above the media panel, which paints in the
+   positioned layer because it carries a transform. */
+.btn-case::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Scroll entrance. Falls back to the settled state when js/projects.js
+   is absent or motion is reduced, so nothing is ever left hidden. */
+.projects--reveal .project {
+  opacity: var(--reveal-in, 1);
+  transform: translateY(var(--reveal-y, 0px));
+  will-change: opacity, transform;
+}
+
+/* Hover: the whole row lifts a touch, the media breathes, the arrow
+   sets off toward the upper right. Nothing changes at rest, so the
+   approved static design is untouched. */
+/* The lift uses `translate`, which is applied before `transform`, so it
+   layers on top of the scroll-driven entrance without smoothing it. */
+.project { transition: translate 320ms var(--e-proj); }
+.project:hover { translate: 0 var(--proj-lift); }
+
+.project__media {
+  overflow: hidden; /* future images/videos clip to the radius */
+  transform: scale(1);
+  transition: transform var(--t-proj-hover) var(--e-proj),
+              box-shadow var(--t-proj-hover) var(--e-proj);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.project:hover .project__media {
+  transform: scale(var(--proj-media-zoom));
+  box-shadow: 0 18px 44px -12px rgba(50, 41, 41, 0.18);
+}
+
+/* A panel holding a device mockup must not create a stacking context,
+   or the device could not be lifted above the row's stretched link and
+   its screen would be unusable. The zoom moves onto the device, which
+   keeps the same hover feel and lets the embed receive the pointer. */
+.project__media--device,
+.project:hover .project__media--device {
+  transform: none;
+  will-change: auto;
+}
+
+.project:hover .device { scale: var(--proj-media-zoom); }
+
+/* Media dropped in later fills the frame and zooms with it */
+.project__media > img,
+.project__media > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-case { transition: transform 260ms var(--e-proj); }
+
+.btn-case__icon {
+  transition: transform 260ms var(--e-proj);
+  will-change: transform;
+}
+
+.project:hover .btn-case__icon,
+.btn-case:hover .btn-case__icon { transform: translate(2px, -2px); }
+
+.btn-case:focus-visible {
+  outline: 2px solid rgba(50, 41, 41, 0.4);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects--reveal .project {
+    opacity: 1;
+    transform: none;
+  }
+
+  .project,
+  .project__media,
+  .device,
+  .btn-case,
+  .btn-case__icon { transition: none; }
+
+  .project:hover { translate: none; }
+  .project:hover .project__media { transform: none; }
+  .project:hover .device { scale: 1; }
+  .project:hover .btn-case__icon,
+  .btn-case:hover .btn-case__icon { transform: none; }
+}
+
+/* ═══════════ 7 · Outlined button hover (nav + hero actions) ═══════
+   Applies to the nav pill and the four hero action chips only. The
+   question chips keep their own black selected state and are not
+   touched. Nothing changes at rest, and the lift uses `translate`
+   so it never collides with a transform.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  --c-border-hover: #c4c4c4;
+  --shadow-hover: 0 4px 12px -4px rgba(50, 41, 41, 0.16);
+  --t-btn-hover: 200ms;
+  --e-btn-hover: cubic-bezier(0.33, 1, 0.68, 1); /* ease-out */
+}
+
+.nav__pill,
+.chip--action {
+  cursor: pointer;
+  transition: border-color var(--t-btn-hover) var(--e-btn-hover),
+              box-shadow var(--t-btn-hover) var(--e-btn-hover),
+              translate var(--t-btn-hover) var(--e-btn-hover);
+}
+
+.nav__pill:hover,
+.chip--action:hover {
+  border-color: var(--c-border-hover);
+  box-shadow: var(--shadow-hover);
+  translate: 0 -2px;
+}
+
+.nav__link:focus-visible,
+.chip--action:focus-visible {
+  outline: 2px solid rgba(50, 41, 41, 0.35);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__pill,
+  .chip--action { transition: none; }
+
+  .nav__pill:hover,
+  .chip--action:hover { translate: none; }
+}

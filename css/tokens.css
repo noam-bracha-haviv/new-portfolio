@@ -1,0 +1,61 @@
+/* ============================================================
+   Design tokens — values taken directly from Figma
+   File: dw9o5ZKgKrvwrVWcIfaDcR · frames "HOME PAGE" (317:4638) and "v2" (317:4450)
+   ============================================================ */
+
+:root {
+  /* ── Canvas ─────────────────────────────────────────────── */
+  --canvas-width: 1440px;
+  --gutter: 120px;
+
+  /* ── Type families ──────────────────────────────────────── */
+  --font-primary: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Host Grotesk', 'Poppins', system-ui, sans-serif;
+
+  /* ── Type sizes ─────────────────────────────────────────── */
+  --fs-hero: 48px;
+  --fs-contact: 40px;
+  --fs-heading: 30px;
+  --fs-body: 16px;
+  --fs-linkedin: 36px;
+  --fs-micro: 11px;
+
+  /* ── Colours ────────────────────────────────────────────── */
+  --c-black: #000000;
+  --c-white: #ffffff;
+  --c-ink: #322929;          /* capabilities text + rule */
+  --c-ink-contact: #1b283c;  /* contact headline */
+  --c-text-muted: #555555;   /* project labels + descriptions */
+  --c-text-faint: #949192;   /* hero disclaimer */
+  --c-text-ghost: rgba(85, 85, 85, 0.46); /* about paragraph body */
+  --c-text-ghost-soft: rgba(85, 85, 85, 0.33); /* contact note */
+  --c-label-caps: #a9a8a7;   /* "CAPABILITIES" */
+  --c-border: #d9d9d9;
+  --c-border-card: #d8d9d7;
+  --c-surface: #f1f2f5;      /* project media + capabilities panel */
+  --c-highlight: #f8e986;    /* headline highlight */
+  --c-touch: #2154dd;        /* contact button fill ("Get in touch"; the
+                                LinkedIn circle carries the same value inside
+                                assets/icon-linkedin-circle.svg) */
+
+  /* ── Radii ──────────────────────────────────────────────── */
+  --r-chip: 18px;
+  --r-nav: 22px;
+  --r-panel: 24px;
+  --r-touch: 30px;
+  --r-rule: 5px;
+
+  /* ── Borders ────────────────────────────────────────────── */
+  --bw-chip: 1.5px;
+  --bw-hairline: 1px;
+
+  /* ── About emoji ────────────────────────────────────────────
+     Figma glyph sizes are multiplied by this factor. 0.85 = 15%
+     smaller than Figma, so the emoji read as more subtle. Wrapper
+     boxes keep their Figma geometry, so positions are unchanged. */
+  --emoji-scale: 0.85;
+
+  /* ── Fixed element metrics ──────────────────────────────── */
+  --h-chip: 37px;
+  --h-project-block: 680px;
+}
