@@ -295,6 +295,11 @@
 
   .nav { flex-direction: column; gap: 16px; }
 
+  /* Four items in the pill overflow a phone; drop the fixed slot width
+     and tighten the gap so it fits without changing the desktop design. */
+  .nav__pill { gap: 14px; padding: 8px 12px; }
+  .nav__link { min-width: 0; padding: 6px 8px; margin: -6px -8px; }
+
   .hero__avatar { margin-top: 40px; }
 
   .chip { white-space: normal; height: auto; min-height: var(--h-chip); text-align: center; }

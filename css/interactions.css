@@ -377,7 +377,6 @@
   --e-btn-hover: cubic-bezier(0.33, 1, 0.68, 1); /* ease-out */
 }
 
-.nav__pill,
 .chip--action {
   cursor: pointer;
   transition: border-color var(--t-btn-hover) var(--e-btn-hover),
@@ -385,12 +384,20 @@
               translate var(--t-btn-hover) var(--e-btn-hover);
 }
 
-.nav__pill:hover,
 .chip--action:hover {
   border-color: var(--c-border-hover);
   box-shadow: var(--shadow-hover);
   translate: 0 -2px;
 }
+
+/* Nav items: a soft rounded background behind the hovered item only.
+   The container is never touched. */
+.nav__link {
+  cursor: pointer;
+  transition: background-color var(--t-btn-hover) var(--e-btn-hover);
+}
+
+.nav__link:hover { background-color: var(--c-surface); }
 
 .nav__link:focus-visible,
 .chip--action:focus-visible {
@@ -399,9 +406,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav__pill,
+  .nav__link,
   .chip--action { transition: none; }
 
-  .nav__pill:hover,
   .chip--action:hover { translate: none; }
 }

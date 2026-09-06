@@ -78,7 +78,15 @@
 }
 
 .nav__link {
-  width: 67px;
+  /* content-box + negative margin: the hover pill's padding grows the
+     paint area only — the item's footprint, and therefore the Figma
+     spacing, is unchanged. min-width keeps the original 67px slots. */
+  box-sizing: content-box;
+  width: auto;
+  min-width: 67px;
+  padding: 6px 12px;
+  margin: -6px -12px;
+  border-radius: 999px;
   font-size: var(--fs-body);
   line-height: normal;
   white-space: nowrap;
