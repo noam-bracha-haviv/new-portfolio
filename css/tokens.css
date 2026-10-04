@@ -34,9 +34,8 @@
   --c-border-card: #d8d9d7;
   --c-surface: #f1f2f5;      /* project media + capabilities panel */
   --c-highlight: #f8e986;    /* headline highlight */
-  --c-touch: #2154dd;        /* contact button fill ("Get in touch"; the
-                                LinkedIn circle carries the same value inside
-                                assets/icon-linkedin-circle.svg) */
+  --c-touch: #f5f5f5;        /* contact button fill, both buttons */
+  --c-touch-ink: #000000;    /* their text, icons and hover ground */
 
   /* ── Radii ──────────────────────────────────────────────── */
   --r-chip: 18px;

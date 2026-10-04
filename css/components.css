@@ -119,7 +119,8 @@
 }
 
 /* ── "Get in touch" ──────────────────────────────────────────
-   169 × 56 · #2154dd fill · no border · radius 30
+   169 × 56 · #f5f5f5 fill · radius 30. The hairline is an inset
+   shadow, not a border, so the inner geometry never shifts.
    ─────────────────────────────────────────────────────────── */
 .btn-touch {
   position: absolute;
@@ -129,6 +130,7 @@
   height: 56px;
   background: var(--c-touch);
   border-radius: var(--r-touch);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
 }
 
 /* Content group sits at x 615 (Figma), 140 wide, vertically centred */
@@ -142,32 +144,35 @@
   font-weight: 500;
   font-size: var(--fs-body);
   line-height: normal;
-  color: var(--c-white);
+  color: var(--c-touch-ink);
   white-space: nowrap;
 }
 
+/* Solid black disc on the right of the pill */
 .btn-touch__icon {
   left: 127px;
   width: 32px;
   height: 32px;
   transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--c-touch-ink);
 }
 
-.btn-touch__icon-bg {
-  width: 32px;
-  height: 32px;
-}
-
+/* The exported envelope, used as a mask so it can take either colour.
+   Size and offset are unchanged from the original glyph. */
 .btn-touch__icon-glyph {
   position: absolute;
   left: 6px;
   top: 7.5px;
   width: 20.0004px;
   height: 17px;
+  background-color: var(--c-white);
+  -webkit-mask: url(../assets/icon-mail.svg) no-repeat center / 20.0004px 17px;
+  mask: url(../assets/icon-mail.svg) no-repeat center / 20.0004px 17px;
 }
 
 /* ── LinkedIn circle ─────────────────────────────────────────
-   55 × 56 ellipse · #2154dd fill · no stroke
+   55 × 56 ellipse · #f5f5f5 fill, matching the pill
    ─────────────────────────────────────────────────────────── */
 .btn-in {
   position: absolute;
@@ -175,11 +180,9 @@
   top: 347px;
   width: 55px;
   height: 56px;
-}
-
-.btn-in__bg {
-  width: 55px;
-  height: 56px;
+  border-radius: 50%;
+  background: var(--c-touch);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
 }
 
 .btn-in__label {
@@ -191,7 +194,7 @@
   font-weight: 600;
   font-size: var(--fs-linkedin);
   line-height: normal;
-  color: var(--c-white);
+  color: var(--c-touch-ink);
 }
 
 /* ── MacBook mockup ──────────────────────────────────────────
