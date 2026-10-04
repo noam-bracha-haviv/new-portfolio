@@ -286,3 +286,54 @@
   border-radius: 0 0 5px 5px;
   background: linear-gradient(#a8a9b1, #cbccd2);
 }
+
+/* ── Better Health project cover ─────────────────────────────
+   Source: Figma "Better Health — Website", frame 5009:6852.
+   Ground #00194F with the official brand mark centred — nothing else
+   in the rectangle. Scoped to this card only.
+   ─────────────────────────────────────────────────────────── */
+
+/* Doubled class: css/sections.css loads later and sets the gray surface
+   on .project__media, so an equal-specificity rule here would lose. */
+.project__media.project__media--bh {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #00194f;
+}
+
+/* Grid overlay, measured from Figma frame 1464:19620 (UX Mapping for VR):
+   ~215px cells in a 1961px-wide frame (11% of width) → 73.5px here, 1px
+   lines in rgb(82,75,137), fading linearly to nothing at ~68% height.
+   Sits behind the mark, exactly as in the reference. */
+.project__media--bh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(to right, rgb(82, 75, 137) 0 1px, transparent 1px 73.5px),
+    repeating-linear-gradient(to bottom, rgb(82, 75, 137) 0 1px, transparent 1px 73.5px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 340 × 164.78 keeps the mark's exported 293 × 142 proportions.
+   Scoped through the panel class so it outranks the generic
+   `.project__media > img { width:100%; height:100% }` fill rule in
+   css/interactions.css, which would otherwise stretch the mark. */
+.project__media--bh .bh-mark {
+  position: relative;
+  z-index: 1; /* above the grid, like the reference frame */
+  width: 340px;
+  height: 164.78px;
+  object-fit: contain;
+}
+
+/* 7px wider than the designed 333px — the only way to keep the supplied
+   copy at 4 lines, so this card's text block stays 279px like the others. */
+.project__desc.project__desc--bh {
+  width: 340px;
+}
