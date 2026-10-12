@@ -340,3 +340,80 @@
 .project__desc.project__desc--bh {
   width: 340px;
 }
+
+/* ── Status chip (non-interactive) ───────────────────────────
+   Same shape as .chip so a "state" reads as native to the system,
+   but it is a <span>: no link, no button, nothing focusable.
+   ─────────────────────────────────────────────────────────── */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: var(--h-chip);
+  padding: 4px 14px;
+  background: var(--c-white);
+  border: var(--bw-chip) solid var(--c-border);
+  border-radius: var(--r-chip);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: normal;
+  color: var(--c-black);
+  white-space: nowrap;
+}
+
+.status-chip__dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-label-caps);
+}
+
+/* ── Project: case study in progress ─────────────────────────
+   Replaces the black "open case study" button on the Spello card.
+   Occupies the same 37px row, so the card's vertical rhythm and
+   the text block above it do not move.
+   ─────────────────────────────────────────────────────────── */
+.project__status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  min-height: var(--h-chip);
+}
+
+.project__status-note {
+  font-size: 13px;
+  line-height: normal;
+  color: var(--c-text-muted);
+}
+
+/* Media panel for a project whose case study is still being written:
+   the designed surface, a faint diagonal hatch so it reads as
+   deliberately reserved rather than empty, and the state badge. */
+/* Doubled classes throughout: css/sections.css and css/interactions.css
+   load later, so an equal-specificity rule here would lose — the
+   background shorthand, the pointer cursor and the hover affordances
+   all come from those files. */
+.project__media.project__media--soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(85, 85, 85, 0.045) 0 1px,
+    transparent 1px 14px
+  );
+}
+
+/* Nothing in this card is clickable, so it must not offer the
+   affordances of one: no pointer, no lift, no media zoom. */
+.project.project--soon { cursor: default; }
+.project.project--soon:hover { translate: none; }
+
+.project.project--soon:hover .project__media {
+  transform: none;
+  box-shadow: none;
+}
