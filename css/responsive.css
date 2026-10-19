@@ -254,6 +254,8 @@
     flex: none;
   }
 
+  .btn-in.btn-gh { left: auto; }
+
   .contact__note {
     position: static;
     transform: none;

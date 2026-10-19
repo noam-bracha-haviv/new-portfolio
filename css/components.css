@@ -41,6 +41,7 @@
 .chip--linkedin { width: 109px; }
 .chip--resume   { width: 118px; }
 .chip--email    { width: 95px; }
+.chip--github   { width: 100px; }
 
 .chip__icon {
   display: flex;
@@ -124,7 +125,7 @@
    ─────────────────────────────────────────────────────────── */
 .btn-touch {
   position: absolute;
-  left: calc(50% - 125px);
+  left: calc(50% - 165.5px);
   top: 347px;
   width: 169px;
   height: 56px;
@@ -176,13 +177,24 @@
    ─────────────────────────────────────────────────────────── */
 .btn-in {
   position: absolute;
-  left: calc(50% + 70px);
+  left: calc(50% + 29.5px);
   top: 347px;
   width: 55px;
   height: 56px;
   border-radius: 50%;
   background: var(--c-touch);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+}
+
+/* GitHub: same disc as LinkedIn, one button-width plus the 26px gap to its right */
+.btn-in.btn-gh { left: calc(50% + 110.5px); }
+
+.btn-gh__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--c-touch-ink);
 }
 
 .btn-in__label {

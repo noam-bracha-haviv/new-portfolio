@@ -431,6 +431,7 @@
 
 .btn-touch__label,
 .btn-in__label,
+.btn-gh__icon,
 .btn-touch__icon,
 .btn-touch__icon-glyph {
   transition: background-color var(--t-contact-hover) var(--e-contact-hover),
@@ -444,11 +445,56 @@
 }
 
 .btn-touch:hover .btn-touch__label,
-.btn-in:hover .btn-in__label { color: var(--c-white); }
+.btn-in:hover .btn-in__label,
+.btn-in:hover .btn-gh__icon { color: var(--c-white); }
 
 /* Disc inverts: white circle, black envelope */
 .btn-touch:hover .btn-touch__icon { background: var(--c-white); }
 .btn-touch:hover .btn-touch__icon-glyph { background-color: var(--c-touch-ink); }
+
+/* Slide to send (js/contact.js). The disc moves on `translate`, so its
+   own transform and the hover colours above stay exactly as they are.
+   --slide is the distance in px, --slide-p the share of the track. */
+:root { --e-slide: cubic-bezier(0.22, 1, 0.36, 1); }
+
+.btn-touch__icon {
+  translate: calc(var(--slide, 0px) * -1) 0;
+  cursor: grab;
+  touch-action: none;
+  transition: background-color var(--t-contact-hover) var(--e-contact-hover),
+              translate 380ms var(--e-slide),
+              scale 200ms var(--e-slide);
+}
+
+/* The label gives way as the disc passes over it */
+.btn-touch__label {
+  opacity: calc(1 - var(--slide-p, 0) * 1.5);
+  transition: color var(--t-contact-hover) var(--e-contact-hover),
+              opacity 380ms var(--e-slide);
+}
+
+/* While dragging, follow the pointer with no lag */
+.btn-touch.is-sliding .btn-touch__icon {
+  cursor: grabbing;
+  scale: 1.06;
+  transition: background-color var(--t-contact-hover) var(--e-contact-hover),
+              scale 200ms var(--e-slide);
+}
+
+.btn-touch.is-sliding .btn-touch__label {
+  transition: color var(--t-contact-hover) var(--e-contact-hover);
+}
+
+/* Click, tap or Enter: the same slide, played quickly on its own */
+.btn-touch.is-auto .btn-touch__icon {
+  transition: background-color var(--t-contact-hover) var(--e-contact-hover),
+              translate 300ms cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.btn-touch.is-auto .btn-touch__label {
+  transition: color var(--t-contact-hover) var(--e-contact-hover),
+              opacity 300ms cubic-bezier(0.45, 0, 0.2, 1);
+}
 
 .btn-touch:focus-visible,
 .btn-in:focus-visible {
@@ -461,6 +507,13 @@
   .btn-in,
   .btn-touch__label,
   .btn-in__label,
+  .btn-gh__icon,
   .btn-touch__icon,
-  .btn-touch__icon-glyph { transition: none; }
+  .btn-touch__icon-glyph,
+  .btn-touch.is-sliding .btn-touch__icon,
+  .btn-touch.is-sliding .btn-touch__label,
+  .btn-touch.is-auto .btn-touch__icon,
+  .btn-touch.is-auto .btn-touch__label { transition: none; }
+
+  .btn-touch.is-sliding .btn-touch__icon { scale: none; }
 }
