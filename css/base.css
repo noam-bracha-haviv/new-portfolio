@@ -38,3 +38,6 @@ button {
 h1, h2, h3 { font-weight: 500; font-size: inherit; line-height: normal; }
 
 [hidden] { display: none !important; }
+
+/* Keeps hyphenated compound words (e.g. "pre-arrival") on one line. */
+.nowrap { white-space: nowrap; }
